@@ -139,6 +139,11 @@ options:
       - Sets the C(ControlPersist) option.
     type: str
     version_added: 8.1.0
+  address_family:
+    description:
+      - Sets the C(AddressFamily) option.
+    type: str
+    version_added: 9.6.0
 requirements:
 - paramiko
 '''
@@ -272,6 +277,7 @@ class SSHConfig(object):
             controlmaster=self.params.get('controlmaster'),
             controlpath=self.params.get('controlpath'),
             controlpersist=fix_bool_str(self.params.get('controlpersist')),
+            address_family=self.params.get('address_family'),
         )
 
         config_changed = False
@@ -378,6 +384,7 @@ def main():
             controlpersist=dict(type='str', default=None),
             user=dict(default=None, type='str'),
             user_known_hosts_file=dict(type='str', default=None),
+            address_family=dict(type='str', default=None),
         ),
         supports_check_mode=True,
         mutually_exclusive=[
